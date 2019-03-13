@@ -19,14 +19,29 @@ number_tier = 0;
 tier = 0;
 sign = 0;%0为初始值，1位长度方向，2为宽度方向，3为高度方向
 
+
+N_l = 0;
+N_w = 0;
+N_h = 0;
+
+E_l = 0;
+E_w = 0;
+E_h = 0;
+
+
+V = truck_length * truck_width * truck_height;
+v = box_length * box_width * box_height;
+
+
+
+
+
 %以长度为方向
 %宽为x，高为y
 x_1_max = floor(truck_width/box_width);
 x_2_max = floor(truck_height/box_width);
 y_4_max = floor(truck_height/box_height);
 % x_1_max等为变量最大值
-
-
 for x1 = 0:1:x_1_max% 循环遍历
    y1 = floor((truck_width - x1*box_width)/box_height);
    for x2 = 0:1:x_2_max
@@ -34,11 +49,11 @@ for x1 = 0:1:x_1_max% 循环遍历
        for y4 =0:1:y_4_max
            x4 = floor((truck_height-y4*box_height)/box_width);
            if x2*box_width<=y4*box_height% 两种情况分类讨论，注意，由于是按长度分层，因此有重心向下作用
-               x3 = floor((truck_width-x1*box_width)/box_width);
-               y3 = floor((truck_width-x3*box_width)/box_height);
+               y3 = round(x1*box_width/box_height);
+               x3 = floor(min((y1*box_height),(truck_width-y3*box_height))/box_width);
            else
                x3 = round(y1*box_height/box_width);
-               y3 = floor((truck_width-x3*box_width)/box_height);
+               y3 = floor(min((x1*box_width),(truck_width-x3*box_width))/box_height);
                %四舍五入，考虑到重心问题
            end
            %结果判断
@@ -51,7 +66,11 @@ for x1 = 0:1:x_1_max% 循环遍历
                x = [x1,x2,x3,x4];
                y = [y1,y2,y3,y4];
            end
-       end
+           if N_l < number_tmp
+               N_l = number_tmp;
+               E_l = N_l * v /V ;
+           end
+        end
    end
 end
 
@@ -69,11 +88,11 @@ for x1 = 0:1:x_1_max
        for y4 =0:1:y_4_max
            x4 = floor((truck_height-y4*box_height)/box_length);
            if x2*box_length<=y4*box_height
-               x3 = floor((truck_width-x1*box_length)/box_length);
-               y3 = floor((truck_width-x3*box_length)/box_height);
+               y3 = round(x1*box_length/box_height);
+               x3 = floor(min((y1*box_height),(truck_width-y3*box_height))/box_length);
            else
                x3 = round(y1*box_height/box_length);
-               y3 = floor((truck_width-x3*box_length)/box_height);
+               y3 = floor(min((x1*box_length),(truck_width-x3*box_length))/box_height);
                %四舍五入，考虑到重心问题
            end
            %结果判断
@@ -85,6 +104,10 @@ for x1 = 0:1:x_1_max
                tier = tier_width;
                x = [x1,x2,x3,x4];
                y = [y1,y2,y3,y4];
+           end
+           if N_w < number_tmp
+               N_w = number_tmp;
+               E_w = N_w * v /V ;
            end
        end
    end
@@ -104,11 +127,11 @@ for x1 = 0:1:x_1_max
        for y4 =0:1:y_4_max
            x4 = floor((truck_height-y4*box_length)/box_width);
            if x2*box_width<=y4*box_length
-               x3 = floor((truck_width-x1*box_width)/box_width);
-               y3 = floor((truck_width-x3*box_width)/box_length);
+               y3 = round(x1*box_width/box_length);
+               x3 = floor(min((y1*box_length),(truck_width-y3*box_length))/box_width);
            else
                x3 = round(y1*box_length/box_width);
-               y3 = floor((truck_width-x3*box_width)/box_length);
+               y3 = floor(min((x1*box_width),(truck_width-x3*box_width))/box_length);
                %四舍五入，考虑到重心问题
            end
            %结果判断
@@ -121,8 +144,15 @@ for x1 = 0:1:x_1_max
                x = [x1,x2,x3,x4];
                y = [y1,y2,y3,y4];
            end
+           if N_h < number_tmp
+               N_h = number_tmp;
+               E_h = N_h * v /V ;
+           end           
        end
    end
 end
 
+fprintf('宽：%2.2f%%\n', E_w*100);
+fprintf('长：%2.2f%%\n', E_l*100);
+fprintf('高：%2.2f%%\n', E_h*100);
 end 
