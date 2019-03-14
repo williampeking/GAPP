@@ -3,6 +3,8 @@
 % CityNumber 城市编号
 % Longitude 经度
 % Latitude 纬度
+CityStruct = struct('CityName','','CityNumber',0,'Longitude',0.0,'Latitude',0.0);
+City = repmat(CityStruct,[16,1]);
 City(1).CityName = '昆明';
 City(2).CityName = '昭通';
 City(3).CityName = '曲靖';

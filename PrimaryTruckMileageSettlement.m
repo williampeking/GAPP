@@ -41,5 +41,5 @@ end
 
 % 结算总里程
 PrimarySettelment = sum(PrimaryTruckMileage(:,3));
-NewSettlement = sum(TruckTable(:,3));
+
 

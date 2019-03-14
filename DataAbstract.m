@@ -1,10 +1,10 @@
 % 导入发货数据
 % 保存在Raw_data
-[~,~,Raw_data] = xlsread('昆烟发货省内数据6月至11月.xls');
+[~,~,Raw_data] = xlsread('Data.xls');
 
 % 数据抽取
 % 抽取有用信息
-% 合同号，发布日期，数量，运达地ID,车次号，要求到货日期
+% 序列号，发布日期，数量，运达地ID,车次号，要求到货日期
 % 保存为Abstract_data
 
 Abstract_data = Raw_data(:,[1,9,13,21,24,27]);
