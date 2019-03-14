@@ -34,7 +34,13 @@ for i = 1:1:length(Rank)
     % 添加里程
     TruckTable(j).Mileage = TruckTable(j).Mileage + PointDistance(FindCitybyNumber(City,TruckTable(j).Route(end)),FindCitybyNumber(City,ContractTable(i,3)));
     % 添加路线
-    TruckTable(j).Route = [TruckTable(j).Route ContractTable(i,3)];
+    if TruckTable(j).Route(end) ~= ContractTable(i,3)
+        TruckTable(j).Route = [TruckTable(j).Route ContractTable(i,3)];
+    end
     
 end
+
+% 最后的车，要回城
+TruckTable(j).Mileage = TruckTable(j).Mileage + PointDistance(FindCitybyNumber(City,TruckTable(j).Route(end)),City(1));
+TruckTable(j).Route = [TruckTable(j).Route City(1).CityNumber];
 end

@@ -8,6 +8,14 @@ Capability = 1800;
 PercentSurvive = 0.80;
 % 精英 Best = Population
 
+if ~exist('City','var')
+    City_data;
+end
+
+if ~exist('ContractTable','var')
+    DataAbstract;
+end
+
 
 % 定义种群结构体
 PopulationStruct = struct('Number',0,'Rank',[],'Settlement',0.0,'TruckTable',[]);
@@ -37,7 +45,7 @@ end
 
 for g = 1:1:Generation
     %开始循环
-    g
+    disp(g);
     % 评估
     for i = 1:1:PopulationNumber
         [Population(i).TruckTable] = Arrangement(Population(i).Rank,ContractTable,Capability,City);
