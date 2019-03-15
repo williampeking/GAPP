@@ -19,7 +19,7 @@ number_tier = 0;
 tier = 0;
 sign = 0;%0为初始值，1位长度方向，2为宽度方向，3为高度方向
 
-
+% N,E为测试用
 N_l = 0;
 N_w = 0;
 N_h = 0;
@@ -152,7 +152,7 @@ for x1 = 0:1:x_1_max
    end
 end
 
-fprintf('宽：%2.2f%%\n', E_w*100);
-fprintf('长：%2.2f%%\n', E_l*100);
-fprintf('高：%2.2f%%\n', E_h*100);
+% fprintf('宽：%2.2f%%\n', E_w*100);
+% fprintf('长：%2.2f%%\n', E_l*100);
+% fprintf('高：%2.2f%%\n', E_h*100);
 end 

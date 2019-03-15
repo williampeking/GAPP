@@ -49,5 +49,3 @@ Truck_Number_data(Truck_Number_data(:,2)>=1800,:)=[];
 
 % 抽取合同表，第一列为合同号，第二列为数量，第三列目的地ID, 第四列为收货日期和2018-06-01的日期差
 ContractTable = [cell2mat(Abstract_data(:,1)) cell2mat(Abstract_data(:,3)) cell2mat(Abstract_data(:,4)) datenum(Abstract_data(:,6))-datenum('2018-06-01')];
-
-
