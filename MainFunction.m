@@ -5,7 +5,7 @@ Generation = 100;
 % 群体人口总数
 PopulationNumber = 200;
 % 承载能力 Capability 其余参数暂时不查看
-[Capability,~,~,~,~,~] = FourBlock(17.5,2.4,2.9,0.455,0.243,0.57);
+[Capability, x,y,number_tier,tier,sign] = FourBlock(17.5,2.4,2.9,0.455,0.243,0.57);
 % 选择概率 PercentSurvive 淘汰的比例
 PercentSurvive = 0.80;
 % 两点变异概率 PercentVariation_TwoPoint
